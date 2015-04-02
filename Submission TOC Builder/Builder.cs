@@ -22,7 +22,6 @@ namespace Submission_TOC_Builder
         public Builder()
         {
             InitializeComponent();
-
         }
 
         private void btn_SelectDirectory_Click(object sender, EventArgs e)
