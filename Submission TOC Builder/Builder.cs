@@ -131,10 +131,12 @@ namespace Submission_TOC_Builder
                 var dirPath = dir.FullName;
                 if (!dirPath.EndsWith("\\"))
                     dirPath += "\\";
-
                 // If the file exists then replace the dir path with empty string to make it relative
                 if (file.Exists && file.FullName.IndexOf(dirPath, StringComparison.OrdinalIgnoreCase) > -1)
-                    return file.FullName.Replace(dirPath, "");
+                {
+                    var relative = file.FullName.Replace(dirPath, "");
+                    return relative.Replace('\\', '/');
+                }
             }
 
             return null;
@@ -221,26 +223,94 @@ namespace Submission_TOC_Builder
         private void HtmlToPdf(XmlDocument doc, String savePath)
         {
             using (MemoryStream msOutput = new MemoryStream())
-            using (TextReader reader = new StringReader(doc.OuterXml))
             {
-                using (Document document = new Document(PageSize.A4, 30, 30, 30, 30))
+                using (TextReader reader = new StringReader(doc.OuterXml))
                 {
-                    PdfWriter writer = PdfWriter.GetInstance(document, msOutput);
+                    using (Document document = new Document(PageSize.A4, 30, 30, 30, 30))
+                    {
+                        document.AddCreationDate();
 
-                    document.Open();
+                        PdfWriter writer = PdfWriter.GetInstance(document, msOutput);
 
-                    XMLWorkerHelper.GetInstance().ParseXHtml(
-                        writer,
-                        document,
-                        reader);
+                        document.Open();
 
-                    document.Close();
+                        XMLWorkerHelper.GetInstance().ParseXHtml(
+                            writer,
+                            document,
+                            reader);
+
+
+
+                        document.Close();
+                    }
                 }
 
                 byte[] buffer = msOutput.ToArray();
-                using (FileStream fs = File.Create(savePath))
+                // SOURCE: http://stackoverflow.com/questions/8140339/using-itextsharp-to-extract-and-update-links-in-an-existing-pdf
+                using (var reader = new PdfReader(buffer))
                 {
-                    fs.Write(buffer, 0, (int)buffer.Length);
+                    for (var i = 1; i <= reader.NumberOfPages; i++)
+                    {
+                        var page = reader.GetPageN(i);
+                        var annots = page.GetAsArray(PdfName.ANNOTS);
+
+                        //Make sure we have something
+                        if ((annots == null) || (annots.Length == 0))
+                            continue;
+
+                        //Loop through each annotation
+                        foreach (PdfObject annot in annots.ArrayList)
+                        {
+                            //Convert the itext-specific object as a generic PDF object
+                            PdfDictionary AnnotationDictionary = (PdfDictionary)PdfReader.GetPdfObject(annot);
+
+                            //Make sure this annotation has a link
+                            if (!AnnotationDictionary.Get(PdfName.SUBTYPE).Equals(PdfName.LINK))
+                                continue;
+
+                            //Make sure this annotation has an ACTION
+                            // if (AnnotationDictionary.Get(PdfName.A) != null)
+                            //     continue;
+
+                            //Get the ACTION for the current annotation
+                            PdfDictionary AnnotationAction = (PdfDictionary)AnnotationDictionary.Get(PdfName.A);
+
+                            var uriObj = AnnotationAction.Get(PdfName.URI);
+
+                            if (uriObj != null && uriObj.IsString()) 
+                            {
+                                var uri = uriObj.ToString();
+                                if (!String.IsNullOrWhiteSpace(uri) && uri.IndexOf(".pdf") >= 1) 
+                                {
+                                    uri = uri.Replace('/', '\\');
+
+                                    AnnotationAction.Remove(PdfName.URI);
+                                    AnnotationAction.Put(PdfName.S, PdfName.GOTOR);
+                                    AnnotationAction.Put(PdfName.F, new PdfString(uri));
+                                }
+                            }
+                        }
+                    }
+
+                    //Next we create a new document add import each page from the reader above
+                    using (FileStream FS = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                    {
+                        using (Document Doc = new Document())
+                        {
+                            using (PdfCopy writer = new PdfCopy(Doc, FS))
+                            {
+                                Doc.Open();
+                                for (int i = 1; i <= reader.NumberOfPages; i++)
+                                {
+                                    writer.AddPage(writer.GetImportedPage(reader, i));
+                                }
+                                Doc.Close();
+                            }
+                        }
+                    }
+                    
+
+                    reader.Close();
                 }
             }
         }
@@ -292,8 +362,6 @@ namespace Submission_TOC_Builder
                     txt_Path.Text = args[1];
                 }
             }
-
-            Build();
         }
     }
 }
