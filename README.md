@@ -1,6 +1,4 @@
-# TOC-Builder
-
-Needs refactoring. Code isn't pretty yet.
+# NEES TOC Builder (free)
 
 ## Description
 Simple project to build build table of contents files for electronic submissions using NEES format for European health authorities and EMA. 
