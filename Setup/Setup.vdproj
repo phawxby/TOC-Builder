@@ -21,20 +21,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_967F1D6D8DC9F3ADADA10E5AD729AB17"
+        "MsmKey" = "8:_1B028977EC3E9307FB1C88E0C4631EF3"
         "OwnerKey" = "8:_0EBDFC2E05D04A0896D12DEDC5D3D703"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B191D80B6FBF5591440F1F37D56F0D1E"
+        "MsmKey" = "8:_4F3C3A4E814A21683EB66BBD6739FAC7"
         "OwnerKey" = "8:_0EBDFC2E05D04A0896D12DEDC5D3D703"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B191D80B6FBF5591440F1F37D56F0D1E"
-        "OwnerKey" = "8:_967F1D6D8DC9F3ADADA10E5AD729AB17"
+        "MsmKey" = "8:_4F3C3A4E814A21683EB66BBD6739FAC7"
+        "OwnerKey" = "8:_1B028977EC3E9307FB1C88E0C4631EF3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,19 +46,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B191D80B6FBF5591440F1F37D56F0D1E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0EBDFC2E05D04A0896D12DEDC5D3D703"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_967F1D6D8DC9F3ADADA10E5AD729AB17"
+        "OwnerKey" = "8:_1B028977EC3E9307FB1C88E0C4631EF3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4F3C3A4E814A21683EB66BBD6739FAC7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -116,6 +116,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -145,14 +153,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_967F1D6D8DC9F3ADADA10E5AD729AB17"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1B028977EC3E9307FB1C88E0C4631EF3"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:itextsharp.xmlworker, Version=5.5.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_967F1D6D8DC9F3ADADA10E5AD729AB17"
+                    "_1B028977EC3E9307FB1C88E0C4631EF3"
                     {
                     "Name" = "8:itextsharp.xmlworker.dll"
                     "Attributes" = "3:512"
@@ -176,14 +184,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B191D80B6FBF5591440F1F37D56F0D1E"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4F3C3A4E814A21683EB66BBD6739FAC7"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:itextsharp, Version=5.5.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B191D80B6FBF5591440F1F37D56F0D1E"
+                    "_4F3C3A4E814A21683EB66BBD6739FAC7"
                     {
                     "Name" = "8:itextsharp.dll"
                     "Attributes" = "3:512"
@@ -305,15 +313,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Submission TOC Builder"
-        "ProductCode" = "8:{EC00EC50-8298-4428-AFF0-51EB4992891D}"
-        "PackageCode" = "8:{65F099CD-70E8-4292-8BFA-73B9767C8B3A}"
+        "ProductCode" = "8:{9579E8AA-2F9A-4CC0-B9DD-DF3F4742F803}"
+        "PackageCode" = "8:{A5798665-8A1F-45E9-9A70-3680EDF6242C}"
         "UpgradeCode" = "8:{41964741-D820-437A-8501-A2D77D5BE978}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:0.3"
         "Manufacturer" = "8:Hawxby.com"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.hawxby.com"
@@ -927,7 +935,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_0EBDFC2E05D04A0896D12DEDC5D3D703"
             {
-            "SourcePath" = "8:..\\Submission TOC Builder\\obj\\Release\\Submission TOC Builder.exe"
+            "SourcePath" = "8:..\\Submission TOC Builder\\obj\\Debug\\Submission TOC Builder.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_69EAEB7AC22C45DBB62F72603830AC06"

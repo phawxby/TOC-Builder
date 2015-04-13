@@ -116,16 +116,19 @@ namespace Submission_TOC_Builder.Builders
                 var bodyNode = doc.CreateElement("body");
                 htmlNode.AppendChild(bodyNode);
 
+                var ul = bodyNode.OwnerDocument.CreateElement("ul");
+                bodyNode.AppendChild(ul);
+
                 // Builds the file list for the supplied directory
-                BuildListForDir(dir, dir, bodyNode, coreTechnicalDocument);
+                BuildForDir(dir, dir, ul, coreTechnicalDocument);
 
                 // Create a sensible file name
                 var filename = String.Format("{0}-toc", coreTechnicalDocument ? "ctd" : dir.Name.ToLowerInvariant());
 
-                //doc.Save(Path.Combine(dir.FullName, filename + ".html"));
+                // doc.Save(Path.Combine(dir.FullName, filename + ".html"));
 
                 // Save to PDF
-                Helpers.pdf.HtmlToPdf(doc, Path.Combine(dir.FullName, filename + ".pdf"));
+                Helpers.Pdf.HtmlToPdf(doc, Path.Combine(dir.FullName, filename + ".pdf"));
             }
         }
 
@@ -136,38 +139,48 @@ namespace Submission_TOC_Builder.Builders
         /// <param name="rootDir"></param>
         /// <param name="node"></param>
         /// <param name="coreTechnicalDocument"></param>
-        private void BuildListForDir(DirectoryInfo dir, DirectoryInfo rootDir, XmlNode node, Boolean coreTechnicalDocument)
+        private void BuildForDir(DirectoryInfo dir, DirectoryInfo rootDir, XmlNode node, Boolean coreTechnicalDocument)
         {
-            var ul = node.OwnerDocument.CreateElement("ul");
-            node.AppendChild(ul);
-
             // A ctd has a slightly different structure, go straight into sub directories
             if (coreTechnicalDocument)
             {
                 foreach (var subDir in dir.GetDirectories())
                 {
-                    BuildFileListItemsForDir(subDir, rootDir, ul);
+                    BuildFileListItemsForDir(subDir, rootDir, node);
                 }
             }
             else
             {
-                // Create a label fro the dir
+                // Build all dirs
+                BuildDirListItemsForDir(dir, rootDir, node);
+            }
+        }
+
+        /// <summary>
+        /// Builds the list items for a specific directory
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="rootDir"></param>
+        /// <param name="node"></param>
+        private void BuildDirListItemsForDir(DirectoryInfo dir, DirectoryInfo rootDir, XmlNode node)
+        {
+            foreach (var subDir in dir.GetDirectories())
+            {
+                // Create a label for the dir
                 var li = node.OwnerDocument.CreateElement("li");
-                ul.AppendChild(li);
+                node.AppendChild(li);
 
                 var span = node.OwnerDocument.CreateElement("span");
-                span.InnerText = dir.Name;
+                span.InnerText = subDir.Name;
                 li.AppendChild(span);
 
-                // Then list all directories
-                foreach (var subDir in dir.GetDirectories())
-                {
-                    BuildListForDir(subDir, rootDir, li, coreTechnicalDocument);
-                }
+                var ul = node.OwnerDocument.CreateElement("ul");
+                li.AppendChild(ul);
 
-                // Then all files 
-                BuildFileListItemsForDir(dir, rootDir, ul);
+                BuildDirListItemsForDir(subDir, rootDir, ul);
             }
+
+            BuildFileListItemsForDir(dir, rootDir, node);
         }
 
         /// <summary>

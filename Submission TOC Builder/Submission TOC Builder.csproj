@@ -61,7 +61,7 @@
     <Compile Include="Builders\IBuilder.cs" />
     <Compile Include="Builders\NeesToc.cs" />
     <Compile Include="Helpers\Paths.cs" />
-    <Compile Include="Helpers\pdf.cs" />
+    <Compile Include="Helpers\Pdf.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Builder.resx">

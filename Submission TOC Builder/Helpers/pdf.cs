@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace Submission_TOC_Builder.Helpers
 {
-    public static class pdf
+    public static class Pdf
     {
         /// <summary>
         /// Turns the supplied html into a pdf
@@ -89,20 +89,20 @@ namespace Submission_TOC_Builder.Helpers
                         foreach (PdfObject annot in annots.ArrayList)
                         {
                             //Convert the itext-specific object as a generic PDF object
-                            PdfDictionary AnnotationDictionary = (PdfDictionary)PdfReader.GetPdfObject(annot);
+                            PdfDictionary annotationDictionary = (PdfDictionary)PdfReader.GetPdfObject(annot);
 
                             //Make sure this annotation has a link
-                            if (!AnnotationDictionary.Get(PdfName.SUBTYPE).Equals(PdfName.LINK))
+                            if (!annotationDictionary.Get(PdfName.SUBTYPE).Equals(PdfName.LINK))
                                 continue;
 
                             //Get the ACTION for the current annotation
-                            PdfDictionary AnnotationAction = (PdfDictionary)AnnotationDictionary.Get(PdfName.A);
+                            PdfDictionary annotationAction = (PdfDictionary)annotationDictionary.Get(PdfName.A);
 
                             // Check we have something again
-                            if (AnnotationAction != null)
+                            if (annotationAction != null)
                             {
                                 // Pull the URI for the action
-                                var uriObj = AnnotationAction.Get(PdfName.URI);
+                                var uriObj = annotationAction.Get(PdfName.URI);
 
                                 // If it has a URI
                                 if (uriObj != null && uriObj.IsString())
@@ -116,10 +116,13 @@ namespace Submission_TOC_Builder.Helpers
                                         uri = uri.Replace('/', '\\');
 
                                         // Remove the URI
-                                        AnnotationAction.Remove(PdfName.URI);
+                                        annotationAction.Remove(PdfName.URI);
+                                        annotationAction.Remove(PdfName.S);
                                         // Change to GOTOR and set the file
-                                        AnnotationAction.Put(PdfName.S, PdfName.GOTOR);
-                                        AnnotationAction.Put(PdfName.F, new PdfString(uri));
+
+                                        annotationAction.Put(PdfName.D, PdfName.FITH);
+                                        annotationAction.Put(PdfName.F, new PdfString(uri));
+                                        annotationAction.Put(PdfName.S, PdfName.GOTOR);
                                     }
                                 }
                             }
