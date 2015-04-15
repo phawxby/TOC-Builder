@@ -123,6 +123,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -313,15 +321,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Submission TOC Builder"
-        "ProductCode" = "8:{9579E8AA-2F9A-4CC0-B9DD-DF3F4742F803}"
-        "PackageCode" = "8:{A5798665-8A1F-45E9-9A70-3680EDF6242C}"
+        "ProductCode" = "8:{7ADBE2D3-84CE-4C15-8F3B-D15AC9CC5C03}"
+        "PackageCode" = "8:{DC9C815A-0515-4F6E-BDF5-38D9A0FE5390}"
         "UpgradeCode" = "8:{41964741-D820-437A-8501-A2D77D5BE978}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.3"
+        "ProductVersion" = "8:1.0"
         "Manufacturer" = "8:Hawxby.com"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.hawxby.com"
@@ -935,7 +943,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_0EBDFC2E05D04A0896D12DEDC5D3D703"
             {
-            "SourcePath" = "8:..\\Submission TOC Builder\\obj\\Debug\\Submission TOC Builder.exe"
+            "SourcePath" = "8:..\\Submission TOC Builder\\obj\\Release\\Submission TOC Builder.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_69EAEB7AC22C45DBB62F72603830AC06"
