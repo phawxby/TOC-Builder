@@ -84,6 +84,7 @@ namespace Submission_TOC_Builder
                 if (!String.IsNullOrWhiteSpace(args[1]) && Directory.Exists(args[1]))
                 {
                     txt_Path.Text = args[1];
+                    btn_Build.Enabled = true;
                 }
             }
         }
