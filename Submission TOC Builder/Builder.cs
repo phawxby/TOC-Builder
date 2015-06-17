@@ -33,17 +33,7 @@ namespace Submission_TOC_Builder
 
                 dlg.ShowDialog();
 
-                _builder.SetDir(dlg.SelectedPath);
-                if (_builder.ValidDir)
-                {
-                    txt_Path.Text = dlg.SelectedPath;
-
-                    updateFoundLbl();
-                }
-                else
-                {
-                    MessageBox.Show("Selected path is invalid");
-                }
+                SetDir(dlg.SelectedPath);
             }
         }
 
@@ -66,14 +56,21 @@ namespace Submission_TOC_Builder
 
         private void Build()
         {
-            _builder.Build();
+            try
+            {
+                _builder.Build();
 
-            lbl_Found.Text = "Done!";
+                lbl_Found.Text = "Done!";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error building pdf: " + ex.Message + "\n\nThis is likely due to an invalid document structure");
+            }
         }
 
         private void txt_Path_TextChanged(object sender, EventArgs e)
         {
-            btn_Build.Enabled = _builder.ValidDir;
+            SetDir(txt_Path.Text, true);
         }
 
         private void Builder_Load(object sender, EventArgs e)
@@ -81,11 +78,26 @@ namespace Submission_TOC_Builder
             var args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
-                if (!String.IsNullOrWhiteSpace(args[1]) && Directory.Exists(args[1]))
-                {
-                    txt_Path.Text = args[1];
-                    btn_Build.Enabled = true;
-                }
+                SetDir(args[1]);
+            }
+        }
+
+        private void SetDir(String path, Boolean textBoxInput = false)
+        {
+            _builder.SetDir(path);
+
+            btn_Build.Enabled = _builder.ValidDir && _builder.FoundFiles > 0;
+
+            if (_builder.ValidDir)
+            {
+                if (!textBoxInput)
+                    txt_Path.Text = path;
+
+                updateFoundLbl();
+            }
+            else
+            {
+                MessageBox.Show("Selected path is invalid");
             }
         }
     }
