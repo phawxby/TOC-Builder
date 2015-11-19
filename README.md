@@ -11,7 +11,7 @@ Download the [latest release](../../releases/latest) from the release link above
 
 ## Usage
 
-### Options 1
+### Option 1
 Right click the folder and select "Build Submission TOC"
 
 ![Right click](https://cloud.githubusercontent.com/assets/1090602/7412457/07194f70-ef3b-11e4-84b3-ec514e333426.png)
@@ -20,7 +20,7 @@ Then press build
 
 ![Build](https://cloud.githubusercontent.com/assets/1090602/7412541/c11ab116-ef3b-11e4-84fa-46b4d8b658e5.png)
 
-### Options 2
+### Option 2
 Option 2 is to find "Submission TOC Builder" in your start menu then select a folder.
 
 ![Select folder](https://cloud.githubusercontent.com/assets/1090602/7412540/c117ac28-ef3b-11e4-8d3d-e8b6e30ad964.png)
