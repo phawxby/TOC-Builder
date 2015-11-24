@@ -35,4 +35,4 @@ If you encounter any issues please file a [new bug report](../../issues/new) and
 ## License 
 Licensed under AGPL and is totally free to use. See the LICENSE file for more details
 
-[![Analytics](https://ga-beacon.appspot.com/UA-4734549-10/TOC-Builder/readme.md)](https://github.com/igrigorik/ga-beacon)
+![Analytics](https://ga-beacon.appspot.com/UA-4734549-10/TOC-Builder/readme)
